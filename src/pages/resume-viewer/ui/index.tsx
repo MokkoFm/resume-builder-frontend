@@ -40,7 +40,7 @@ export const ResumeViewerPage = () => {
       <Box
         width="50%"
         sx={{
-          backgroundColor: 'grey',
+          backgroundColor: '#80808070',
           position: 'fixed',
           right: 0,
           top: 0,
