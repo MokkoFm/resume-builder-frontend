@@ -9,25 +9,20 @@ export const ResumeCard = ({ resume }: Props) => {
   const { title, updatedAt } = resume
   return (
     <Box
+      width="200px"
+      minHeight="200px"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
       sx={{
-        height: 150,
-        display: 'flex',
-        boxSizing: 'border-box',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 2,
-        gap: 2,
         border: 'solid 1px black'
       }}
     >
       <Typography variant="h6">{title}</Typography>
       <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
-      <Button variant="contained" color="primary">
+      <Button variant="text" color="primary">
         Edit
-      </Button>
-      <Button variant="contained" color="secondary">
-        Delete
       </Button>
       <Button variant="contained" color="primary">
         Download

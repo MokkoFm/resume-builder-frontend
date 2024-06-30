@@ -1,4 +1,7 @@
 export const MOCK_CANDIDATE_PROFILE = {
+  id: '1',
+  title: 'Software Engineer',
+  updatedAt: '',
   firstName: 'John',
   lastName: 'Doe',
   email: 'johndoe@example.com',
