@@ -1,17 +1,16 @@
-import { Resume } from '@/entities/resume'
 import { useState, useEffect } from 'react'
+import { Resume } from '../types'
+import { MOCK_CANDIDATE_PROFILE } from '../config'
 
-export const useResume = (id: number) => {
+export const useResume = (id: string) => {
   const [resume, setResume] = useState<Resume | null>(null)
+  const savedResumes = [MOCK_CANDIDATE_PROFILE]
 
   useEffect(() => {
-    const fetchResume = async () => {
-      const response = await fetch(`/api/resumes/${id}`)
-      const data = await response.json()
-      setResume(data)
+    const currentResume = savedResumes.find(resume => resume.id === id)
+    if (currentResume) {
+      setResume(currentResume)
     }
-
-    fetchResume()
   }, [id])
 
   return resume

@@ -8,12 +8,12 @@ export type Experience = {
 }
 
 export type Education = {
-  degree?: string
-  major?: string
+  degree: string
+  major: string
   university?: string
   school?: string
-  location?: string
-  startDate?: string
+  location: string
+  startDate: string
   endDate?: string
   description?: string
 }
