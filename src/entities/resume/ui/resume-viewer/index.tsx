@@ -1,5 +1,5 @@
 import { Resume } from '@/shared/types'
-import { Box, Divider, Paper, Typography } from '@mui/material'
+import { Box, Button, Divider, Paper, Typography } from '@mui/material'
 import {
   ResumeHeader,
   ResumeAbout,
@@ -8,6 +8,8 @@ import {
   ResumeSkills,
   ResumeCertifications
 } from './parts'
+import downloadPDF from '@/features/download-pdf'
+import { Download } from '@mui/icons-material'
 
 type Props = {
   resume: Resume
@@ -29,15 +31,29 @@ export const ResumeViewer = ({ resume }: Props) => {
     skills
   } = resume
   const fullName = `${firstName} ${lastName}`
+
   return (
-    <Box>
+    <Box display="flex" justifyContent="center" alignItems="start">
+      <Box mt={4}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            downloadPDF('resume', fullName)
+          }}
+        >
+          <Download />
+        </Button>
+      </Box>
       <Paper
+        id="resume"
         elevation={0}
         sx={{
           padding: 2,
-          mx: 4,
+          mx: 8,
           my: 4,
-          minHeight: 'calc(100vh - 96px)'
+          minHeight: 'calc(100vh - 96px)',
+          width: '600px'
         }}
       >
         <ResumeHeader

@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { ResumeViewer } from '@/entities/resume'
+import { ResumeInput, ResumeViewer } from '@/entities/resume'
 import { useResume } from '@/shared'
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import { BackButton } from '@/shared/ui/back-button/back-button'
 
 type Params = {
   resumeId: string
@@ -29,12 +30,21 @@ export const ResumeViewerPage = () => {
   }
 
   return (
-    <Box display="flex" justifyContent="space-between" height="100vh" m={0} p={0}>
-      <Box width="50%"></Box>
+    <Box display="flex" justifyContent="space-between" height="100vh">
+      <Box width="50%">
+        <Box mt={2}>
+          <BackButton />
+        </Box>
+        <ResumeInput resume={currentResume} />
+      </Box>
       <Box
         width="50%"
         sx={{
-          backgroundColor: 'grey'
+          backgroundColor: 'grey',
+          position: 'fixed',
+          right: 0,
+          top: 0,
+          bottom: 0
         }}
       >
         <ResumeViewer resume={currentResume} />
