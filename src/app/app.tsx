@@ -10,7 +10,7 @@ const App: FC = () => {
       <Routes>
         <Route index path="/" element={<LayoutWrapper element={<HomePage />} />} />
         <Route
-          path="/resume/:resumeId"
+          path="/resumes/:resumeId/edit"
           element={<LayoutWrapper element={<ResumeViewerPage />} />}
         />
       </Routes>

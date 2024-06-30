@@ -7,7 +7,7 @@ export type LayoutProps = {
 
 const BasicLayout: FC<LayoutProps> = ({ children }) => {
   return (
-    <Container>
+    <Container maxWidth="xl">
       <div className="content">{children}</div>
     </Container>
   )

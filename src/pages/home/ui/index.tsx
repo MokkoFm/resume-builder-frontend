@@ -4,9 +4,10 @@ import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
 import Resumes from './resumes'
 import Templates from './templates'
+import { MOCK_CANDIDATE_PROFILE } from '@/shared/config'
 
 export const HomePage = () => {
-  const [resumes, setResumes] = useState<Resume[]>([])
+  const [resumes, setResumes] = useState<Resume[]>([MOCK_CANDIDATE_PROFILE])
   const [userTemplates, setUserTemplates] = useState<Template[]>([])
   return (
     <Box>

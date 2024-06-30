@@ -1,22 +1,19 @@
-import {
-  PersonalDetails,
-  Experience,
-  Education,
-  Certification,
-  Reference,
-  Skill
-} from '@/entities/resume'
+import { Experience, Education, Certification, Reference, Skill } from '@/entities/resume'
 
 export interface Resume {
   id: string
   title: string
-  personalDetails: PersonalDetails
+  updatedAt: string
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber: string
+  address: string
   experiences: Experience[]
   education: Education[]
   certifications: Certification[]
   description: string
-  reference: Reference[]
+  references: Reference[]
   linkedin: string
   skills: Skill[]
-  updatedAt: string
 }

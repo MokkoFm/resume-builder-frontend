@@ -1,34 +1,30 @@
 import { Resume } from '@/shared/types'
 import { Box, Button, Typography } from '@mui/material'
+import { EditButton } from '@/shared/ui/edit-button'
 
 type Props = {
   resume: Resume
 }
 
 export const ResumeCard = ({ resume }: Props) => {
-  const { title, updatedAt } = resume
+  const { title, updatedAt, firstName, lastName } = resume
+  const fullName = `${firstName} ${lastName}`
   return (
     <Box
+      width="200px"
+      minHeight="200px"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
       sx={{
-        height: 150,
-        display: 'flex',
-        boxSizing: 'border-box',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 2,
-        gap: 2,
         border: 'solid 1px black'
       }}
     >
-      <Typography variant="h6">{title}</Typography>
+      <Typography variant="subtitle2">{title}</Typography>
+      <Typography variant="h6">{fullName}</Typography>
       <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
-      <Button variant="contained" color="primary">
-        Edit
-      </Button>
-      <Button variant="contained" color="secondary">
-        Delete
-      </Button>
+      <EditButton path={`resumes/${resume.id}/edit`} />
       <Button variant="contained" color="primary">
         Download
       </Button>

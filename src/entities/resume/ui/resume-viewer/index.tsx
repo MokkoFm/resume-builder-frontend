@@ -1,5 +1,13 @@
 import { Resume } from '@/shared/types'
-import { Box, Typography } from '@mui/material'
+import { Box, Divider, Paper, Typography } from '@mui/material'
+import {
+  ResumeHeader,
+  ResumeAbout,
+  ResumeExperience,
+  ResumeEducation,
+  ResumeSkills,
+  ResumeCertifications
+} from './parts'
 
 type Props = {
   resume: Resume
@@ -7,32 +15,50 @@ type Props = {
 
 export const ResumeViewer = ({ resume }: Props) => {
   const {
-    personalDetails,
+    title,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
     experiences,
     education,
     certifications,
     description,
-    reference,
+    references,
     linkedin,
     skills
   } = resume
+  const fullName = `${firstName} ${lastName}`
   return (
-    <Box
-      sx={{
-        height: 150,
-        display: 'flex',
-        boxSizing: 'border-box',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 2,
-        gap: 2,
-        border: 'solid 1px black'
-      }}
-    >
-      <Typography variant="h6" fontSize={12} textAlign={'center'} fontWeight={600}>
-        Resume
-      </Typography>
+    <Box>
+      <Paper
+        elevation={0}
+        sx={{
+          padding: 2,
+          mx: 4,
+          my: 4,
+          minHeight: 'calc(100vh - 96px)'
+        }}
+      >
+        <ResumeHeader
+          fullName={fullName}
+          title={title}
+          email={email}
+          phoneNumber={phoneNumber}
+          linkedin={linkedin}
+        />
+        <Divider />
+        <ResumeAbout description={description} />
+        <Divider />
+        <ResumeExperience experiences={experiences} />
+        <Divider />
+        <ResumeEducation education={education} />
+        <Divider />
+        <ResumeSkills skills={skills} />
+        <Divider />
+        <ResumeCertifications certifications={certifications} />
+        <Divider />
+      </Paper>
     </Box>
   )
 }
