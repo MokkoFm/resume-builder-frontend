@@ -1,4 +1,4 @@
-type PersonalDetails = {
+export type PersonalDetails = {
   firstName: string
   lastName: string
   email: string
@@ -6,7 +6,7 @@ type PersonalDetails = {
   address: string
 }
 
-type Experience = {
+export type Experience = {
   title: string
   company: string
   location: string
@@ -15,7 +15,7 @@ type Experience = {
   description: string
 }
 
-type Education = {
+export type Education = {
   degree: string
   major: string
   university: string
@@ -25,31 +25,19 @@ type Education = {
   description: string
 }
 
-type Certification = {
+export type Certification = {
   name: string
   date: string
 }
 
-type Reference = {
+export type Reference = {
   name: string
   company: string
   email: string
   phoneNumber: string
 }
 
-type Skill = {
+export type Skill = {
   name: string
   score: number
-}
-
-export interface Resume {
-  personalDetails: PersonalDetails
-  experiences: Experience[]
-  education: Education[]
-  certifications: Certification[]
-  description: string
-  reference: Reference[]
-  linkedin: string
-  skills: Skill[]
-  updatedAt: string
 }

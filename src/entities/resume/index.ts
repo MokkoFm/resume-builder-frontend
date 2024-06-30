@@ -1,2 +1,2 @@
-export { ResumeViewer } from './ui'
+export { ResumeViewer, ResumeCard } from './ui'
 export * from './types'
