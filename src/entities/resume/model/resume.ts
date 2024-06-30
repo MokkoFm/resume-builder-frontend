@@ -51,4 +51,5 @@ export interface Resume {
   reference: Reference[]
   linkedin: string
   skills: Skill[]
+  updatedAt: string
 }
