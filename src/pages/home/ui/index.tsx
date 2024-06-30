@@ -1,5 +1,10 @@
+import { Box, Typography } from '@mui/material'
+
 export const HomePage = () => {
-    return (
-        <p>Home page</p>
-    )
+  return (
+    <Box>
+      <Typography variant="h1">Dashboard</Typography>
+      <Typography variant="subtitle1">Welcome to the dashboard</Typography>
+    </Box>
+  )
 }
