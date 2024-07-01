@@ -3,7 +3,6 @@
 Quick Start
 
 ```shell
-Add uniqore SDK's npm token to your systems environment variables.
 
 git clone
 cd your-project-name-here/
