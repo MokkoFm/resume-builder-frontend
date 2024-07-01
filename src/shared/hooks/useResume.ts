@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Resume } from '../types'
-import { MOCK_CANDIDATE_PROFILE } from '../config'
+import { EMPTY_RESUME } from '../config'
 
-export const useResume = (id: string) => {
-  const [resume, setResume] = useState<Resume | null>(null)
-  const savedResumes = [MOCK_CANDIDATE_PROFILE]
+export const useResume = (id: string, savedResumes: Resume[]) => {
+  const [resume, setResume] = useState<Resume>(EMPTY_RESUME)
 
   useEffect(() => {
     const currentResume = savedResumes.find(resume => resume.id === id)
@@ -13,5 +12,5 @@ export const useResume = (id: string) => {
     }
   }, [id])
 
-  return resume
+  return { resume, setResume }
 }
