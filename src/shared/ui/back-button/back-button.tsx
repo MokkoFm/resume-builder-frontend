@@ -1,11 +1,14 @@
 import { Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { ArrowBack } from '@mui/icons-material'
 
-export const BackButton = () => {
-  const navigate = useNavigate()
+type Props = {
+  onBack: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+
+export const BackButton = (props: Props) => {
+  const { onBack } = props
   return (
-    <Button onClick={() => navigate(-1)} startIcon={<ArrowBack />}>
+    <Button onClick={onBack} startIcon={<ArrowBack />}>
       Back
     </Button>
   )

@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
-  const { title, updatedAt, firstName, lastName, id } = resume
+  const { title, updatedAt, firstName, lastName } = resume
   const fullName = `${firstName} ${lastName}`
 
   return (
@@ -24,6 +24,7 @@ export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
       sx={{
         border: 'solid 1px black'
       }}
+      margin={2}
     >
       <Typography variant="subtitle2">{title}</Typography>
       <Typography variant="h6">{fullName}</Typography>

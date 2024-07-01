@@ -1,6 +1,5 @@
 import { Certification } from '@/entities/resume'
 import { Box, Typography } from '@mui/material'
-import { format } from 'date-fns'
 
 type Props = {
   certifications: Certification[]
@@ -22,7 +21,7 @@ const ResumeCertifications = (props: Props) => {
         {certifications.map(cert => (
           <Box key={cert.name}>
             <Typography variant="subtitle1">
-              {cert.name}, {format(cert.date, 'dd.MM.yyyy')}
+              {cert.name}, {cert.date}
             </Typography>
           </Box>
         ))}

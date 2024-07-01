@@ -1,6 +1,6 @@
 import { Resume } from '@/shared/types'
 import { Box, TextField, Collapse, Button } from '@mui/material'
-import { useState } from 'react'
+import { Section } from '../index'
 
 type Props = {
   title: string
@@ -11,12 +11,25 @@ type Props = {
   linkedin: string
   description: string
   setResume: React.Dispatch<React.SetStateAction<Resume>>
+  activeSection: Section
+  setActiveSection: React.Dispatch<React.SetStateAction<Section>>
 }
 
 const ResumePersonalDetailsInput = (props: Props) => {
-  const { title, firstName, lastName, email, phoneNumber, linkedin, description, setResume } = props
+  const {
+    title,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    linkedin,
+    description,
+    setResume,
+    activeSection,
+    setActiveSection
+  } = props
 
-  const [open, setOpen] = useState(true)
+  const isActive = activeSection === 'personal-details'
 
   const handlePersonalDetailsChange = (property: string, value: string) => {
     setResume(prev => ({ ...prev, [property]: value }))
@@ -24,10 +37,10 @@ const ResumePersonalDetailsInput = (props: Props) => {
 
   return (
     <Box>
-      <Button variant="text" onClick={() => setOpen(!open)}>
+      <Button variant="text" onClick={() => setActiveSection('personal-details')}>
         Personal details
       </Button>
-      <Collapse in={open}>
+      <Collapse in={isActive}>
         <Box>
           <Box display="flex" justifyContent="space-between" mt={2}>
             <TextField
