@@ -1,17 +1,18 @@
-import { Box, Button, Collapse, TextField, Divider } from '@mui/material'
-import { useState } from 'react'
+import { Box, Button, Collapse, TextField } from '@mui/material'
 import { Certification } from '@/entities/resume'
 import { Resume } from '@/shared/types'
+import { Section } from '../index'
 
 type Props = {
   certifications: Certification[]
   setResume: React.Dispatch<React.SetStateAction<Resume>>
+  activeSection: Section
+  setActiveSection: React.Dispatch<React.SetStateAction<Section>>
+  isNewResume: boolean
 }
 
 const ResumeCertificatesInput = (props: Props) => {
-  const { certifications, setResume } = props
-
-  const [open, setOpen] = useState(false)
+  const { certifications, setResume, activeSection, setActiveSection, isNewResume } = props
 
   const handleCertificateChange = (property: string, value: string, index: number) => {
     const updatedCertificate = { ...certifications[index], [property]: value }
@@ -20,12 +21,29 @@ const ResumeCertificatesInput = (props: Props) => {
     setResume(prev => ({ ...prev, certifications: updatedCertificates }))
   }
 
+  const isActive = activeSection === 'certifications'
+
+  const onSectionNameClick = () => {
+    setActiveSection('certifications')
+    if (isNewResume && !certifications.length) {
+      setResume(prev => ({
+        ...prev,
+        certifications: [
+          {
+            name: '',
+            date: ''
+          }
+        ]
+      }))
+    }
+  }
+
   return (
     <Box>
-      <Button variant="text" onClick={() => setOpen(!open)}>
+      <Button variant="text" onClick={onSectionNameClick}>
         Certificates
       </Button>
-      <Collapse in={open}>
+      <Collapse in={isActive}>
         {certifications.map((certification, index) => (
           <Box key={index} mt={2} display="flex" justifyContent="space-between">
             <TextField

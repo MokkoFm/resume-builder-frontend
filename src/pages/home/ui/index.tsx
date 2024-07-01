@@ -1,13 +1,16 @@
-import { ResumeCard } from '@/entities/resume'
 import { Resume, Template } from '@/shared/types'
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
 import Resumes from './resumes'
 import Templates from './templates'
-import { MOCK_CANDIDATE_PROFILE } from '@/shared/config'
 
-export const HomePage = () => {
-  const [resumes, setResumes] = useState<Resume[]>([MOCK_CANDIDATE_PROFILE])
+type Props = {
+  resumes: Resume[]
+  setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
+}
+
+export const HomePage = (props: Props) => {
+  const { resumes, setResumes } = props
   const [userTemplates, setUserTemplates] = useState<Template[]>([])
   return (
     <Box>

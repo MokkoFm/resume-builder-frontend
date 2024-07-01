@@ -1,6 +1,5 @@
 import { Experience } from '@/entities/resume'
 import { Box, Typography } from '@mui/material'
-import { format } from 'date-fns'
 
 type Props = {
   experiences: Experience[]
@@ -14,8 +13,8 @@ const ResumeExperience = (props: Props) => {
         Experience
       </Typography>
       {experiences.map(experience => {
-        const startDate = format(experience.startDate, 'dd.MM.yyyy')
-        const endDate = experience.endDate ? format(experience.endDate, 'dd.MM.yyyy') : 'Present'
+        const startDate = experience.startDate
+        const endDate = experience.endDate ? experience.endDate : 'Present'
         return (
           <Box key={`${experience.company}-${experience.startDate}`} my={3}>
             <Box display="flex" justifyContent="space-between">

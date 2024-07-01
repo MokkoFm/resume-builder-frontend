@@ -1,52 +1,36 @@
-import { useNavigate, useParams } from 'react-router-dom'
 import { ResumeInput, ResumeViewer } from '@/entities/resume'
-import { useResume } from '@/shared'
-import { Box, Typography } from '@mui/material'
-import { BackButton } from '@/shared/ui/back-button/back-button'
+import { EMPTY_RESUME } from '@/shared/config'
 import { Resume } from '@/shared/types'
-
-type Params = {
-  resumeId: string
-}
+import { BackButton } from '@/shared/ui/back-button/back-button'
+import { Box } from '@mui/material'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   resumes: Resume[]
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
 }
 
-export const ResumeViewerPage = (props: Props) => {
+const CreateResumePage = (props: Props) => {
   const { resumes, setResumes } = props
-  const { resumeId } = useParams<Params>()
   const navigate = useNavigate()
-  const id = resumeId || ''
+  const newResume = EMPTY_RESUME
+  const [resume, setResume] = useState(newResume)
 
-  const { resume, setResume } = useResume(id, resumes)
-
-  if (!resume) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh'
-        }}
-      >
-        <Typography variant="h6">Unfortunately, a resume doesn't exist</Typography>
-      </Box>
-    )
+  const onBack = () => {
+    navigate('/')
+    setResume(newResume)
   }
-
   return (
     <Box display="flex" justifyContent="space-between" height="100vh">
       <Box width="50%">
         <Box mt={2}>
-          <BackButton onBack={() => navigate('/')} />
+          <BackButton onBack={onBack} />
         </Box>
         <ResumeInput
           resume={resume}
           setResume={setResume}
-          isNewResume={false}
+          isNewResume={true}
           resumes={resumes}
           setResumes={setResumes}
         />
@@ -66,3 +50,5 @@ export const ResumeViewerPage = (props: Props) => {
     </Box>
   )
 }
+
+export default CreateResumePage

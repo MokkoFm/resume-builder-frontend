@@ -1,16 +1,18 @@
 import { Box, Button, Collapse, Divider, TextField } from '@mui/material'
 import { Experience } from '@/entities/resume'
-import { useState } from 'react'
 import { Resume } from '@/shared/types'
+import { Section } from '../index'
 
 type Props = {
   experiences: Experience[]
   setResume: React.Dispatch<React.SetStateAction<Resume>>
+  activeSection: Section
+  setActiveSection: React.Dispatch<React.SetStateAction<Section>>
+  isNewResume: boolean
 }
 
 const ResumeExperienceInput = (props: Props) => {
-  const { experiences, setResume } = props
-  const [open, setOpen] = useState(false)
+  const { experiences, setResume, activeSection, setActiveSection, isNewResume } = props
 
   const handleExperienceChange = (property: string, value: string, index: number) => {
     const updatedExperience = { ...experiences[index], [property]: value }
@@ -19,12 +21,33 @@ const ResumeExperienceInput = (props: Props) => {
     setResume(prev => ({ ...prev, experiences: updatedExperiences }))
   }
 
+  const isActive = activeSection === 'experience'
+
+  const onSectionNameClick = () => {
+    setActiveSection('experience')
+    if (isNewResume && !experiences.length) {
+      setResume(prev => ({
+        ...prev,
+        experiences: [
+          {
+            title: '',
+            company: '',
+            location: '',
+            startDate: '',
+            endDate: '',
+            description: ''
+          }
+        ]
+      }))
+    }
+  }
+
   return (
     <Box>
-      <Button variant="text" onClick={() => setOpen(!open)}>
+      <Button variant="text" onClick={onSectionNameClick}>
         Experience
       </Button>
-      <Collapse in={open}>
+      <Collapse in={isActive}>
         {experiences.map((experience, index) => (
           <Box key={index} mt={2}>
             <Box display="flex" justifyContent="space-between" mt={2}>
@@ -37,7 +60,11 @@ const ResumeExperienceInput = (props: Props) => {
                   handleExperienceChange('title', e.target.value, index)
                 }}
               />
-              <TextField label="Company" value={experience.company} />
+              <TextField
+                label="Company"
+                value={experience.company}
+                onChange={e => handleExperienceChange('company', e.target.value, index)}
+              />
             </Box>
             <Box display="flex" justifyContent="space-between" mt={2}>
               <TextField
@@ -50,7 +77,11 @@ const ResumeExperienceInput = (props: Props) => {
                 value={experience.startDate}
                 onChange={e => handleExperienceChange('startDate', e.target.value, index)}
               />
-              <TextField label="End Date" value={experience.endDate} />
+              <TextField
+                label="End Date"
+                value={experience.endDate}
+                onChange={e => handleExperienceChange('endDate', e.target.value, index)}
+              />
             </Box>
             <Box mt={2}>
               <TextField

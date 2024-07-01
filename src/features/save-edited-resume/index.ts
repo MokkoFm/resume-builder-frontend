@@ -6,9 +6,9 @@ type Props = {
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
 }
 
-export const deleteResume = (props: Props) => {
+export const saveEditedResume = (props: Props) => {
   const { resume, resumes, setResumes } = props
-  const updatedResumes = resumes.filter(r => r.id !== resume.id)
+  const updatedResumes = resumes.map(r => (r.id === resume.id ? resume : r))
   setResumes(updatedResumes)
   return updatedResumes
 }

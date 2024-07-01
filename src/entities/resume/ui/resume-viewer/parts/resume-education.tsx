@@ -1,6 +1,5 @@
 import { Education } from '@/entities/resume/types'
 import { Box, Typography } from '@mui/material'
-import { format } from 'date-fns'
 
 type Props = {
   education: Education[]
@@ -14,8 +13,8 @@ const ResumeEducation = (props: Props) => {
         Education
       </Typography>
       {education.map(education => {
-        const startDate = format(education.startDate, 'dd.MM.yyyy')
-        const endDate = education.endDate ? format(education.endDate, 'dd.MM.yyyy') : 'Present'
+        const startDate = education.startDate
+        const endDate = education.endDate ? education.endDate : 'Present'
         const educationPlace = education.school ?? education.university
         return (
           <Box key={`${education.major}-${education.startDate}`} my={3}>

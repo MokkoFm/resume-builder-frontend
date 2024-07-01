@@ -1,17 +1,18 @@
 import { Education } from '@/entities/resume'
 import { Resume } from '@/shared/types'
 import { Box, Button, Collapse, TextField, Divider } from '@mui/material'
-import { useState } from 'react'
+import { Section } from '../index'
 
 type Props = {
   education: Education[]
   setResume: React.Dispatch<React.SetStateAction<Resume>>
+  activeSection: Section
+  setActiveSection: React.Dispatch<React.SetStateAction<Section>>
+  isNewResume: boolean
 }
 
 const ResumeEducationInput = (props: Props) => {
-  const { education, setResume } = props
-
-  const [open, setOpen] = useState(false)
+  const { education, setResume, activeSection, setActiveSection, isNewResume } = props
 
   const handleEductionChange = (property: string, value: string, index: number) => {
     const updatedEducation = { ...education[index], [property]: value }
@@ -20,12 +21,35 @@ const ResumeEducationInput = (props: Props) => {
     setResume(prev => ({ ...prev, education: updatedEducations }))
   }
 
+  const isActive = activeSection === 'education'
+
+  const onSectionNameClick = () => {
+    setActiveSection('education')
+    if (isNewResume && !education.length) {
+      setResume(prev => ({
+        ...prev,
+        education: [
+          {
+            degree: '',
+            major: '',
+            school: '',
+            university: '',
+            location: '',
+            startDate: '',
+            endDate: '',
+            description: ''
+          }
+        ]
+      }))
+    }
+  }
+
   return (
     <Box>
-      <Button variant="text" onClick={() => setOpen(!open)}>
+      <Button variant="text" onClick={onSectionNameClick}>
         Education
       </Button>
-      <Collapse in={open}>
+      <Collapse in={isActive}>
         {education.map((ed, index) => (
           <Box key={index} mt={2}>
             <Box display="flex" justifyContent="space-between" mt={2}>
