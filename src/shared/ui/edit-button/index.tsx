@@ -9,8 +9,8 @@ export const EditButton = (props: Props) => {
   const { path } = props
   const navigate = useNavigate()
   return (
-    <Button variant="text" color="primary" onClick={() => navigate(`/${path}`)}>
-      Edit
+    <Button variant="contained" color="primary" onClick={() => navigate(`/${path}`)} sx={{ my: 1 }}>
+      Edit resume
     </Button>
   )
 }

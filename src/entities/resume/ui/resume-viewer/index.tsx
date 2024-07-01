@@ -10,6 +10,7 @@ import {
 } from './parts'
 import downloadPDF from '@/features/download-pdf'
 import { Download } from '@mui/icons-material'
+import ResumeDocument from '../resume-document'
 
 type Props = {
   resume: Resume
@@ -17,6 +18,7 @@ type Props = {
 
 export const ResumeViewer = ({ resume }: Props) => {
   const {
+    id,
     title,
     firstName,
     lastName,
@@ -39,42 +41,13 @@ export const ResumeViewer = ({ resume }: Props) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            downloadPDF('resume', fullName)
+            downloadPDF(`resume-${id}`, fullName)
           }}
         >
           <Download />
         </Button>
       </Box>
-      <Paper
-        id="resume"
-        elevation={0}
-        sx={{
-          padding: 2,
-          mx: 8,
-          my: 4,
-          minHeight: 'calc(100vh - 96px)',
-          width: '600px'
-        }}
-      >
-        <ResumeHeader
-          fullName={fullName}
-          title={title}
-          email={email}
-          phoneNumber={phoneNumber}
-          linkedin={linkedin}
-        />
-        <Divider />
-        <ResumeAbout description={description} />
-        <Divider />
-        <ResumeExperience experiences={experiences} />
-        <Divider />
-        <ResumeEducation education={education} />
-        <Divider />
-        <ResumeSkills skills={skills} />
-        <Divider />
-        <ResumeCertifications certifications={certifications} />
-        <Divider />
-      </Paper>
+      <ResumeDocument resume={resume} />
     </Box>
   )
 }
