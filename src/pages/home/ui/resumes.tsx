@@ -19,22 +19,20 @@ const Resumes = (props: Props) => {
   ))
 
   return (
-    <Box display="flex">
-      {resumesList}
-      <StyledCardWrapper>
-        <Button
-          variant="text"
-          onClick={() =>
-            navigate('/resumes/2/create', {
-              state: {
-                resumes
-              }
-            })
-          }
-        >
-          Add Resume
-        </Button>
-      </StyledCardWrapper>
+    <Box>
+      <Typography variant="h4">Resumes</Typography>
+      <Typography variant="subtitle1">Here you can see a list of saved resumes</Typography>
+      <Box display="flex" flexWrap="wrap">
+        {resumesList}
+        <StyledCardWrapper>
+          <Button
+            variant="text"
+            onClick={() => navigate(`/resumes/${resumesList.length + 1}/create`)}
+          >
+            Add Resume
+          </Button>
+        </StyledCardWrapper>
+      </Box>
     </Box>
   )
 }

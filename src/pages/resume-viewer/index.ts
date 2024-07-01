@@ -1,2 +1,2 @@
-import { ResumeViewerPage } from './ui'
-export { ResumeViewerPage }
+import { ResumeEditorPage } from './ui'
+export { ResumeEditorPage }

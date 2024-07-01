@@ -3,7 +3,8 @@ import { ResumeInput, ResumeViewer } from '@/entities/resume'
 import { useResume } from '@/shared'
 import { Box, Typography } from '@mui/material'
 import { BackButton } from '@/shared/ui/back-button/back-button'
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
+import { useState } from 'react'
 
 type Params = {
   resumeId: string
@@ -12,15 +13,18 @@ type Params = {
 type Props = {
   resumes: Resume[]
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
+  templates: Template[]
+  setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
-export const ResumeViewerPage = (props: Props) => {
-  const { resumes, setResumes } = props
+export const ResumeEditorPage = (props: Props) => {
+  const { resumes, setResumes, templates, setTemplates } = props
   const { resumeId } = useParams<Params>()
   const navigate = useNavigate()
   const id = resumeId || ''
 
   const { resume, setResume } = useResume(id, resumes)
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0])
 
   if (!resume) {
     return (
@@ -49,6 +53,9 @@ export const ResumeViewerPage = (props: Props) => {
           isNewResume={false}
           resumes={resumes}
           setResumes={setResumes}
+          templates={templates}
+          selectedTemplate={selectedTemplate}
+          setSelectedTemplate={setSelectedTemplate}
         />
       </Box>
       <Box
@@ -61,7 +68,7 @@ export const ResumeViewerPage = (props: Props) => {
           bottom: 0
         }}
       >
-        <ResumeViewer resume={resume} />
+        <ResumeViewer resume={resume} selectedTemplate={selectedTemplate} />
       </Box>
     </Box>
   )

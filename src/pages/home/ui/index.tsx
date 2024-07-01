@@ -1,17 +1,17 @@
 import { Resume, Template } from '@/shared/types'
-import { Box, Typography } from '@mui/material'
-import { useState } from 'react'
+import { Box, Divider, Typography } from '@mui/material'
 import Resumes from './resumes'
 import Templates from './templates'
 
 type Props = {
   resumes: Resume[]
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
+  templates: Template[]
+  setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
 export const HomePage = (props: Props) => {
-  const { resumes, setResumes } = props
-  const [userTemplates, setUserTemplates] = useState<Template[]>([])
+  const { resumes, setResumes, templates, setTemplates } = props
   return (
     <Box>
       <Box py={5}>
@@ -19,7 +19,8 @@ export const HomePage = (props: Props) => {
         <Typography variant="subtitle1">Welcome to the dashboard</Typography>
       </Box>
       <Resumes resumes={resumes} setResumes={setResumes} />
-      <Templates templates={userTemplates} />
+      <Divider sx={{ my: 2 }} />
+      <Templates templates={templates} setTemplates={setTemplates} />
     </Box>
   )
 }
