@@ -1,27 +1,43 @@
 export type TemplateConfig = {
+  fontSize: {
+    title: number
+    subtitle: number
+    heading: number
+    body: number
+  }
   margins: {
     horizontal: number
     vertical: number
   }
-  header: {
-    fontSize: number
-    fontFamily: string
-    color: string
-  }
-  footer: {
-    fontSize: number
-    fontFamily: string
-    color: string
-  }
-  body: {
-    fontSize: number
-    fontFamily: string
-    color: string
-  }
   watermark: {
     url: string
   }
-  primaryColor: string
-  secondaryColor: string
+  colorSchema: {
+    primaryColor: string
+    secondaryColor: string
+  }
   type: string
+  headerImage: string
+  sections: {
+    header: boolean
+    personalDetails: boolean
+    about: boolean
+    experience: boolean
+    education: boolean
+    skills: boolean
+    certifications: boolean
+    references: boolean
+  }
+  sidebar: {
+    hasSidebar: boolean
+    width: number
+    backgroundColor: string
+    textColor: string
+    sections: {
+      personalDetails: boolean
+      skills: boolean
+      certifications: boolean
+      references: boolean
+    }
+  }
 }

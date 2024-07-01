@@ -1,4 +1,4 @@
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
 import { Box, TextField, Collapse, Button } from '@mui/material'
 import { Section } from '../index'
 

@@ -15,7 +15,7 @@ export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
 
   return (
     <Box
-      width="200px"
+      width="180px"
       minHeight="200px"
       display="flex"
       flexDirection="column"
@@ -29,7 +29,7 @@ export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
       <Typography variant="subtitle2">{title}</Typography>
       <Typography variant="h6">{fullName}</Typography>
       <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
-      <EditButton path={`resumes/${resume.id}/edit`} />
+      <EditButton path={`resumes/${resume.id}/edit`} buttonText="Edit resume" variant="contained" />
       <Button
         variant="text"
         color="primary"

@@ -1,29 +1,45 @@
 import { TemplateCard } from '@/entities/template'
 import { Template } from '@/shared/types'
 import { StyledCardWrapper } from '@/shared/ui/card-wrapper'
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   templates: Template[]
+  setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
 const Templates = (props: Props) => {
-  const { templates } = props
-  if (!templates.length) {
-    return (
-      <Box py={3}>
-        <Typography variant="h4">Templates</Typography>
-        <Typography variant="subtitle1">Here you can see a list of your templates</Typography>
+  const { templates, setTemplates } = props
+
+  const navigate = useNavigate()
+
+  const templatesList = templates.map(template => (
+    <TemplateCard
+      key={template.id}
+      template={template}
+      templates={templates}
+      setTemplates={setTemplates}
+    />
+  ))
+
+  return (
+    <Box>
+      <Typography variant="h4">Templates</Typography>
+      <Typography variant="subtitle1">Templates you can use for a resume creation</Typography>
+      <Box display="flex" flexWrap="wrap">
+        {templatesList}
         <StyledCardWrapper>
-          <Typography variant="h6" fontSize={12} textAlign={'center'} fontWeight={600}>
-            Add Template
-          </Typography>
+          <Button
+            variant="text"
+            onClick={() => navigate(`/templates/${templatesList.length + 1}/create`)}
+          >
+            Add template
+          </Button>
         </StyledCardWrapper>
       </Box>
-    )
-  }
-
-  return templates.map(template => <TemplateCard key={template.id} template={template} />)
+    </Box>
+  )
 }
 
 export default Templates

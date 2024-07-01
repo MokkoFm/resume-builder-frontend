@@ -1,4 +1,4 @@
-import { Resume } from '../types'
+import { Resume, Template } from '../types'
 
 export const MOCK_CANDIDATE_PROFILE = {
   id: '1',
@@ -94,6 +94,7 @@ export const MOCK_CANDIDATE_PROFILE = {
       name: 'C#',
       score: 8
     },
+
     {
       name: 'SQL',
       score: 9
@@ -121,5 +122,53 @@ export const EMPTY_RESUME: Resume = {
   experiences: [],
   education: [],
   certifications: []
+}
 
+export const DEFAULT_TEMPLATE: Template = {
+  id: '1',
+  title: 'Default',
+  updatedAt: '',
+  config: {
+    fontSize: {
+      title: 20,
+      subtitle: 12,
+      heading: 16,
+      body: 12
+    },
+    margins: {
+      horizontal: 4,
+      vertical: 4
+    },
+    watermark: {
+      url: 'https://www.pngall.com/wp-content/uploads/8/Sample-Watermark-PNG-Free-Download.png'
+    },
+    colorSchema: {
+      primaryColor: '#fff',
+      secondaryColor: '#000'
+    },
+    type: 'default',
+    headerImage: 'https://maccfund.org/wp-content/uploads/2013/11/yellow-background-large.png',
+    sections: {
+      header: true,
+      personalDetails: true,
+      about: true,
+      experience: true,
+      education: true,
+      skills: true,
+      certifications: true,
+      references: false
+    },
+    sidebar: {
+      hasSidebar: false,
+      width: 0,
+      backgroundColor: '',
+      textColor: '',
+      sections: {
+        personalDetails: false,
+        skills: false,
+        certifications: false,
+        references: false
+      }
+    }
+  }
 }

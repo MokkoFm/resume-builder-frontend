@@ -1,4 +1,4 @@
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
 import { Box, Button } from '@mui/material'
 import downloadPDF from '@/features/download-pdf'
 import { Download } from '@mui/icons-material'
@@ -6,9 +6,10 @@ import ResumeDocument from '../resume-document'
 
 type Props = {
   resume: Resume
+  selectedTemplate: Template
 }
 
-export const ResumeViewer = ({ resume }: Props) => {
+export const ResumeViewer = ({ resume, selectedTemplate }: Props) => {
   const { id, firstName, lastName } = resume
   const fullName = `${firstName} ${lastName}`
 
@@ -25,7 +26,7 @@ export const ResumeViewer = ({ resume }: Props) => {
           <Download />
         </Button>
       </Box>
-      <ResumeDocument resume={resume} />
+      <ResumeDocument resume={resume} selectedTemplate={selectedTemplate} />
     </Box>
   )
 }
