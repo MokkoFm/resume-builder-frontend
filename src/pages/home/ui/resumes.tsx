@@ -5,10 +5,11 @@ import { Box, Typography } from '@mui/material'
 
 type Props = {
   resumes: Resume[]
+  setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
 }
 
 const Resumes = (props: Props) => {
-  const { resumes } = props
+  const { resumes, setResumes } = props
   if (!resumes.length) {
     return (
       <Box py={3}>
@@ -23,7 +24,9 @@ const Resumes = (props: Props) => {
     )
   }
 
-  return resumes.map(resume => <ResumeCard key={resume.id} resume={resume} />)
+  return resumes.map(resume => (
+    <ResumeCard key={resume.id} resume={resume} resumes={resumes} setResumes={setResumes} />
+  ))
 }
 
 export default Resumes

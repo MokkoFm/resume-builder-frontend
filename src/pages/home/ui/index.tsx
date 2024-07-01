@@ -15,7 +15,7 @@ export const HomePage = () => {
         <Typography variant="h2">Dashboard</Typography>
         <Typography variant="subtitle1">Welcome to the dashboard</Typography>
       </Box>
-      <Resumes resumes={resumes} />
+      <Resumes resumes={resumes} setResumes={setResumes} />
       <Templates templates={userTemplates} />
     </Box>
   )

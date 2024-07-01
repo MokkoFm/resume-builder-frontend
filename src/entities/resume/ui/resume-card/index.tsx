@@ -1,14 +1,15 @@
 import { Resume } from '@/shared/types'
 import { Box, Button, Typography } from '@mui/material'
 import { EditButton } from '@/shared/ui/edit-button'
-import downloadPDF from '@/features/download-pdf'
-import { useRef } from 'react'
+import { deleteResume } from '@/features/delete-resume'
 
 type Props = {
   resume: Resume
+  resumes: Resume[]
+  setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
 }
 
-export const ResumeCard = ({ resume }: Props) => {
+export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
   const { title, updatedAt, firstName, lastName, id } = resume
   const fullName = `${firstName} ${lastName}`
 
@@ -28,7 +29,11 @@ export const ResumeCard = ({ resume }: Props) => {
       <Typography variant="h6">{fullName}</Typography>
       <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
       <EditButton path={`resumes/${resume.id}/edit`} />
-      <Button variant="text" color="primary">
+      <Button
+        variant="text"
+        color="primary"
+        onClick={() => deleteResume({ resume, resumes, setResumes })}
+      >
         Delete
       </Button>
     </Box>
