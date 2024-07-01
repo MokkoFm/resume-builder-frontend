@@ -1,13 +1,5 @@
 import { Resume } from '@/shared/types'
-import { Box, Button, Divider, Paper, Typography } from '@mui/material'
-import {
-  ResumeHeader,
-  ResumeAbout,
-  ResumeExperience,
-  ResumeEducation,
-  ResumeSkills,
-  ResumeCertifications
-} from './parts'
+import { Box, Button } from '@mui/material'
 import downloadPDF from '@/features/download-pdf'
 import { Download } from '@mui/icons-material'
 import ResumeDocument from '../resume-document'
@@ -17,21 +9,7 @@ type Props = {
 }
 
 export const ResumeViewer = ({ resume }: Props) => {
-  const {
-    id,
-    title,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    experiences,
-    education,
-    certifications,
-    description,
-    references,
-    linkedin,
-    skills
-  } = resume
+  const { id, firstName, lastName } = resume
   const fullName = `${firstName} ${lastName}`
 
   return (
