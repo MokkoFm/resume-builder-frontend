@@ -10,9 +10,10 @@ import {
 
 type Props = {
   resume: Resume
+  setResume: React.Dispatch<React.SetStateAction<Resume>>
 }
 
-export const ResumeInput = ({ resume }: Props) => {
+export const ResumeInput = ({ resume, setResume }: Props) => {
   const {
     title,
     firstName,
@@ -23,7 +24,6 @@ export const ResumeInput = ({ resume }: Props) => {
     education,
     certifications,
     description,
-    references,
     linkedin,
     skills
   } = resume
@@ -37,11 +37,12 @@ export const ResumeInput = ({ resume }: Props) => {
         phoneNumber={phoneNumber}
         linkedin={linkedin}
         description={description}
+        setResume={setResume}
       />
-      <ResumeExperienceInput experiences={experiences} />
-      <ResumeEducationInput education={education} />
-      <ResumeSkillsInput skills={skills} />
-      <ResumeCertificatesInput certificates={certifications} />
+      <ResumeExperienceInput experiences={experiences} setResume={setResume} />
+      <ResumeEducationInput education={education} setResume={setResume} />
+      <ResumeSkillsInput skills={skills} setResume={setResume} />
+      <ResumeCertificatesInput certifications={certifications} setResume={setResume} />
     </Box>
   )
 }

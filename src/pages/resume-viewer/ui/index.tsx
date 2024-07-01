@@ -3,6 +3,7 @@ import { ResumeInput, ResumeViewer } from '@/entities/resume'
 import { useResume } from '@/shared'
 import { Box, Typography } from '@mui/material'
 import { BackButton } from '@/shared/ui/back-button/back-button'
+import { MOCK_CANDIDATE_PROFILE } from '@/shared/config'
 
 type Params = {
   resumeId: string
@@ -12,9 +13,11 @@ export const ResumeViewerPage = () => {
   const { resumeId } = useParams<Params>()
   const id = resumeId || ''
 
-  const currentResume = useResume(id)
+  const savedResumes = [MOCK_CANDIDATE_PROFILE]
+  const { resume, setResume } = useResume(id, savedResumes)
+  console.log("resume", resume)
 
-  if (!currentResume) {
+  if (!resume) {
     return (
       <Box
         sx={{
@@ -35,7 +38,7 @@ export const ResumeViewerPage = () => {
         <Box mt={2}>
           <BackButton />
         </Box>
-        <ResumeInput resume={currentResume} />
+        <ResumeInput resume={resume} setResume={setResume} />
       </Box>
       <Box
         width="50%"
@@ -47,7 +50,7 @@ export const ResumeViewerPage = () => {
           bottom: 0
         }}
       >
-        <ResumeViewer resume={currentResume} />
+        <ResumeViewer resume={resume} />
       </Box>
     </Box>
   )
