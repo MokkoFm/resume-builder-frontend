@@ -18,6 +18,7 @@ const CreateResumePage = (props: Props) => {
   const navigate = useNavigate()
   const newResume = EMPTY_RESUME
   const [resume, setResume] = useState(newResume)
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0])
 
   const onBack = () => {
     navigate('/')
@@ -35,6 +36,9 @@ const CreateResumePage = (props: Props) => {
           isNewResume={true}
           resumes={resumes}
           setResumes={setResumes}
+          templates={templates}
+          selectedTemplate={selectedTemplate}
+          setSelectedTemplate={setSelectedTemplate}
         />
       </Box>
       <Box
@@ -47,7 +51,7 @@ const CreateResumePage = (props: Props) => {
           bottom: 0
         }}
       >
-        <ResumeViewer resume={resume} />
+        <ResumeViewer resume={resume} selectedTemplate={selectedTemplate} />
       </Box>
     </Box>
   )

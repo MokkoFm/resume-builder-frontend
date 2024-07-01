@@ -13,6 +13,10 @@ type Props = {
 const ResumeHedaer = (props: Props) => {
   const { fullName, title, email, phoneNumber, linkedin, templateConfig } = props
   const { fontSize, headerImage } = templateConfig
+
+  const addCommatoString = (str: string) => {
+    return str.trim() ? str + ', ' : ''
+  }
   return (
     <Box
       textAlign="center"
@@ -25,10 +29,13 @@ const ResumeHedaer = (props: Props) => {
       }}
     >
       <Typography variant="h6" fontSize={fontSize.title} fontWeight={600}>
-        {fullName}, {title}
+        {addCommatoString(fullName)}
+        {title}
       </Typography>
       <Typography variant="subtitle1" fontSize={fontSize.subtitle}>
-        {email}, {phoneNumber}, {linkedin}
+        {addCommatoString(email)}
+        {addCommatoString(phoneNumber)}
+        {linkedin}
       </Typography>
     </Box>
   )
