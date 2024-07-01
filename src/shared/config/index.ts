@@ -1,4 +1,9 @@
+import { Resume } from '../types'
+
 export const MOCK_CANDIDATE_PROFILE = {
+  id: '1',
+  title: 'Software Engineer',
+  updatedAt: '',
   firstName: 'John',
   lastName: 'Doe',
   email: 'johndoe@example.com',
@@ -98,4 +103,23 @@ export const MOCK_CANDIDATE_PROFILE = {
       score: 10
     }
   ]
+}
+
+export const EMPTY_RESUME: Resume = {
+  id: '',
+  title: '',
+  updatedAt: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  address: '',
+  description: '',
+  linkedin: '',
+  references: [],
+  skills: [],
+  experiences: [],
+  education: [],
+  certifications: []
+
 }
