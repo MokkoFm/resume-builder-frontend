@@ -5,7 +5,7 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 import path from 'path'
 
 export default defineConfig(({ mode }) => ({
-  "base": "/reume-builder-frontend/",
+  base: "/reume-builder-frontend/",
   plugins: [react(), htmlPlugin(loadEnv(mode, '.'))],
   define: {
     // eslint-disable-next-line no-undef
