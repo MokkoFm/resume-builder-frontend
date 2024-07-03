@@ -1,5 +1,14 @@
 import { Resume, Template } from '@/shared/types'
-import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography
+} from '@mui/material'
 import {
   ResumePersonalDetailsInput,
   ResumeExperienceInput,
@@ -11,6 +20,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createResume } from '@/features/create-resume'
 import { saveEditedResume } from '@/features/save-edited-resume'
+import TemplateSettings from './parts/template-settings'
 
 type Props = {
   resume: Resume
@@ -23,7 +33,13 @@ type Props = {
   setSelectedTemplate: React.Dispatch<React.SetStateAction<Template>>
 }
 
-export type Section = 'personal-details' | 'experience' | 'education' | 'skills' | 'certifications'
+export type Section =
+  | 'personal-details'
+  | 'experience'
+  | 'education'
+  | 'skills'
+  | 'certifications'
+  | 'template-settings'
 
 export const ResumeInput = ({
   resume,
@@ -97,6 +113,12 @@ export const ResumeInput = ({
           ))}
         </Select>
       </FormControl>
+      <TemplateSettings
+        selectedTemplate={selectedTemplate}
+        setSelectedTemplate={setSelectedTemplate}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
       <ResumePersonalDetailsInput
         title={title}
         firstName={firstName}
