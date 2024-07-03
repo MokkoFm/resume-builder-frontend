@@ -1,6 +1,6 @@
 import { Box, Button, Collapse, Divider, TextField } from '@mui/material'
 import { Experience } from '@/entities/resume'
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
 import { Section } from '../index'
 
 type Props = {

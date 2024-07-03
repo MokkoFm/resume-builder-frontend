@@ -1,5 +1,5 @@
 import { Education } from '@/entities/resume'
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
 import { Box, Button, Collapse, TextField, Divider } from '@mui/material'
 import { Section } from '../index'
 

@@ -1,37 +1,39 @@
 import { Template } from '@/shared/types'
+import { EditButton } from '@/shared/ui/edit-button'
 import { Box, Button, Typography } from '@mui/material'
 
 type Props = {
   template: Template
+  templates: Template[]
+  setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
-export const TemplateCard = ({ template }: Props) => {
+export const TemplateCard = ({ template, templates, setTemplates }: Props) => {
   const { title, updatedAt } = template
   return (
     <Box
+      width="180px"
+      minHeight="200px"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
       sx={{
-        height: 150,
-        display: 'flex',
-        boxSizing: 'border-box',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 2,
-        gap: 2,
         border: 'solid 1px black'
       }}
+      margin={2}
     >
       <Typography variant="h6">{title}</Typography>
       <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
-      <Button variant="contained" color="primary">
-        Edit
+      <Button variant="contained" sx={{ mt: 1 }}>
+        Create resume
       </Button>
-      <Button variant="contained" color="secondary">
-        Delete
-      </Button>
-      <Button variant="contained" color="primary">
-        Download
-      </Button>
+      <Box display="flex">
+        <EditButton path={`templates/${template.id}/edit`} buttonText="Edit" variant="text" />
+        <Button variant="text" color="primary">
+          Delete
+        </Button>
+      </Box>
     </Box>
   )
 }

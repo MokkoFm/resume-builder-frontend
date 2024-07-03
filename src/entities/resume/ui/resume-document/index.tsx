@@ -1,4 +1,4 @@
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
 import { Paper, Divider } from '@mui/material'
 import {
   ResumeHeader,
@@ -11,10 +11,11 @@ import {
 
 type Props = {
   resume: Resume
+  selectedTemplate: Template
 }
 
 const ResumeDocument = (props: Props) => {
-  const { resume } = props
+  const { resume, selectedTemplate } = props
   const {
     id,
     title,
@@ -29,36 +30,70 @@ const ResumeDocument = (props: Props) => {
   } = resume
 
   const fullName = `${resume.firstName} ${resume.lastName}`
+  const templateConfig = selectedTemplate.config
+
+  const { colorSchema, margins } = templateConfig
+
   return (
     <Paper
       id={`resume-${id}`}
       elevation={0}
       sx={{
         padding: 2,
-        mx: 8,
-        my: 4,
+        mx: margins.horizontal,
+        my: margins.vertical,
         minHeight: 'calc(100vh - 96px)',
-        width: '600px'
+        width: '600px',
+        backgroundColor: colorSchema.primaryColor,
+        color: colorSchema.secondaryColor,
+        backgroundImage: `url(${templateConfig.watermark.url})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
-      <ResumeHeader
-        fullName={fullName}
-        title={title}
-        email={email}
-        phoneNumber={phoneNumber}
-        linkedin={linkedin}
-      />
-      <Divider />
-      <ResumeAbout description={description} />
-      <Divider />
-      <ResumeExperience experiences={experiences} />
-      <Divider />
-      <ResumeEducation education={education} />
-      <Divider />
-      <ResumeSkills skills={skills} />
-      <Divider />
-      <ResumeCertifications certifications={certifications} />
-      <Divider />
+      {templateConfig.sections.header && (
+        <>
+          <ResumeHeader
+            fullName={fullName}
+            title={title}
+            email={email}
+            phoneNumber={phoneNumber}
+            linkedin={linkedin}
+            templateConfig={templateConfig}
+          />
+          <Divider />
+        </>
+      )}
+      {templateConfig.sections.personalDetails && (
+        <>
+          <ResumeAbout description={description} templateConfig={templateConfig} />
+          <Divider />
+        </>
+      )}
+      {templateConfig.sections.experience && (
+        <>
+          <ResumeExperience experiences={experiences} templateConfig={templateConfig} />
+          <Divider />
+        </>
+      )}
+      {templateConfig.sections.education && (
+        <>
+          <ResumeEducation education={education} templateConfig={templateConfig} />
+          <Divider />
+        </>
+      )}
+      {templateConfig.sections.skills && (
+        <>
+          <ResumeSkills skills={skills} templateConfig={templateConfig} />
+          <Divider />
+        </>
+      )}
+      {templateConfig.sections.certifications && (
+        <>
+          <ResumeCertifications certifications={certifications} templateConfig={templateConfig} />
+          <Divider />
+        </>
+      )}
     </Paper>
   )
 }

@@ -1,5 +1,5 @@
-import { Resume } from '@/shared/types'
-import { Box, Button } from '@mui/material'
+import { Resume, Template } from '@/shared/types'
+import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import {
   ResumePersonalDetailsInput,
   ResumeExperienceInput,
@@ -18,11 +18,23 @@ type Props = {
   isNewResume: boolean
   resumes: Resume[]
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
+  templates: Template[]
+  selectedTemplate: Template
+  setSelectedTemplate: React.Dispatch<React.SetStateAction<Template>>
 }
 
 export type Section = 'personal-details' | 'experience' | 'education' | 'skills' | 'certifications'
 
-export const ResumeInput = ({ resume, setResume, isNewResume, resumes, setResumes }: Props) => {
+export const ResumeInput = ({
+  resume,
+  setResume,
+  isNewResume,
+  resumes,
+  setResumes,
+  templates,
+  selectedTemplate,
+  setSelectedTemplate
+}: Props) => {
   const {
     title,
     firstName,
@@ -39,6 +51,8 @@ export const ResumeInput = ({ resume, setResume, isNewResume, resumes, setResume
   const navigate = useNavigate()
 
   const [activeSection, setActiveSection] = useState<Section>('personal-details')
+
+  const templatesNames = templates.map(template => template.title)
 
   const onSave = () => {
     if (isNewResume) {
@@ -58,8 +72,31 @@ export const ResumeInput = ({ resume, setResume, isNewResume, resumes, setResume
     navigate('/')
   }
 
+  const handleTemplateChange = (title: string) => {
+    const selectedTemplate = templates.find(template => template.title === title)
+    if (selectedTemplate) {
+      setSelectedTemplate(selectedTemplate)
+    }
+  }
+
   return (
     <Box mr={4} mt={4}>
+      <FormControl fullWidth>
+        <InputLabel id="resume-template-select-label">Resume template</InputLabel>
+        <Select
+          label="Resume template"
+          labelId="resume-template-select-label"
+          id="resume-template-select"
+          value={templatesNames[0]}
+          onChange={e => handleTemplateChange(e.target.value as string)}
+        >
+          {templatesNames.map(templateName => (
+            <MenuItem key={templateName} value={templateName}>
+              {templateName}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <ResumePersonalDetailsInput
         title={title}
         firstName={firstName}

@@ -1,6 +1,6 @@
 import { ResumeInput, ResumeViewer } from '@/entities/resume'
 import { EMPTY_RESUME } from '@/shared/config'
-import { Resume } from '@/shared/types'
+import { Resume, Template } from '@/shared/types'
 import { BackButton } from '@/shared/ui/back-button/back-button'
 import { Box } from '@mui/material'
 import { useState } from 'react'
@@ -9,13 +9,16 @@ import { useNavigate } from 'react-router-dom'
 type Props = {
   resumes: Resume[]
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
+  templates: Template[]
+  setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
 const CreateResumePage = (props: Props) => {
-  const { resumes, setResumes } = props
+  const { resumes, setResumes, templates, setTemplates } = props
   const navigate = useNavigate()
   const newResume = EMPTY_RESUME
   const [resume, setResume] = useState(newResume)
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0])
 
   const onBack = () => {
     navigate('/')
@@ -33,6 +36,9 @@ const CreateResumePage = (props: Props) => {
           isNewResume={true}
           resumes={resumes}
           setResumes={setResumes}
+          templates={templates}
+          selectedTemplate={selectedTemplate}
+          setSelectedTemplate={setSelectedTemplate}
         />
       </Box>
       <Box
@@ -45,7 +51,7 @@ const CreateResumePage = (props: Props) => {
           bottom: 0
         }}
       >
-        <ResumeViewer resume={resume} />
+        <ResumeViewer resume={resume} selectedTemplate={selectedTemplate} />
       </Box>
     </Box>
   )
