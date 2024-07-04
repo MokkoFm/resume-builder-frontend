@@ -28,8 +28,6 @@ export const ResumeViewer = ({ resume, selectedTemplate }: Props) => {
     }
   }
 
-  console.log('sidebarSettings', sidebarSettings)
-
   return (
     <Box display="flex" justifyContent="center" alignItems="start">
       <Box mt={4}>

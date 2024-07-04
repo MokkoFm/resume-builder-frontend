@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     // Set the base path for the application
-    base: '/resume-builder-frontend/',
+    base: '/',
     plugins: [
       // Use the React plugin for Vite
       react(),
