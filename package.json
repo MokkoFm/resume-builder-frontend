@@ -1,6 +1,6 @@
 {
   "homepage": "https://mokkofm.github.io/resume-builder-frontend/",
-  "name": "resume-builder",
+  "name": "resume-builder-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",

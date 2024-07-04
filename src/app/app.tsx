@@ -11,7 +11,7 @@ const App: FC = () => {
   const [resumes, setResumes] = useState<Resume[]>([MOCK_CANDIDATE_PROFILE])
   const [templates, setTemplates] = useState<Template[]>([DEFAULT_TEMPLATE])
   return (
-    <BrowserRouter basename="/resume-builder-frontend">
+    <BrowserRouter>
       <Routes>
         <Route
           index
