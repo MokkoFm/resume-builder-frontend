@@ -64,7 +64,7 @@ const ResumeDocument = (props: Props) => {
           <Divider />
         </>
       )}
-      {templateConfig.sections.personalDetails && (
+      {templateConfig.sections.about && (
         <>
           <ResumeAbout description={description} templateConfig={templateConfig} />
           <Divider />

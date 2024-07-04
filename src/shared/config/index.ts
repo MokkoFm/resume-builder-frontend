@@ -160,15 +160,13 @@ export const DEFAULT_TEMPLATE: Template = {
     },
     sidebar: {
       hasSidebar: false,
-      width: 0,
+      width: 200,
       backgroundColor: '',
       textColor: '',
-      sections: {
-        personalDetails: false,
-        skills: false,
-        certifications: false,
-        references: false
-      }
+      personalDetails: false,
+      skills: true,
+      certifications: true,
+      references: false
     }
   }
 }

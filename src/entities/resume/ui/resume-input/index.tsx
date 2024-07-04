@@ -159,7 +159,7 @@ export const ResumeInput = ({
         setActiveSection={setActiveSection}
         isNewResume={isNewResume}
       />
-      <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={onSave}>
+      <Button variant="contained" color="primary" sx={{ my: 2 }} onClick={onSave}>
         Save resume
       </Button>
     </Box>
