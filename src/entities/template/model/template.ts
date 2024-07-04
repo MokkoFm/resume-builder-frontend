@@ -33,11 +33,9 @@ export type TemplateConfig = {
     width: number
     backgroundColor: string
     textColor: string
-    sections: {
-      personalDetails: boolean
-      skills: boolean
-      certifications: boolean
-      references: boolean
-    }
+    personalDetails: boolean
+    skills: boolean
+    certifications: boolean
+    references: boolean
   }
 }

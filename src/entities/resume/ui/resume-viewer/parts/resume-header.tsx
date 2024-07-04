@@ -10,13 +10,14 @@ type Props = {
   templateConfig: TemplateConfig
 }
 
+export const addCommatoString = (str: string) => {
+  return str.trim() ? str + ', ' : ''
+}
+
 const ResumeHedaer = (props: Props) => {
   const { fullName, title, email, phoneNumber, linkedin, templateConfig } = props
   const { fontSize, headerImage } = templateConfig
 
-  const addCommatoString = (str: string) => {
-    return str.trim() ? str + ', ' : ''
-  }
   return (
     <Box
       textAlign="center"
@@ -32,11 +33,13 @@ const ResumeHedaer = (props: Props) => {
         {addCommatoString(fullName)}
         {title}
       </Typography>
-      <Typography variant="subtitle1" fontSize={fontSize.subtitle}>
-        {addCommatoString(email)}
-        {addCommatoString(phoneNumber)}
-        {linkedin}
-      </Typography>
+      {templateConfig.sections.personalDetails && (
+        <Typography variant="subtitle1" fontSize={fontSize.subtitle}>
+          {addCommatoString(email)}
+          {addCommatoString(phoneNumber)}
+          {linkedin}
+        </Typography>
+      )}
     </Box>
   )
 }
