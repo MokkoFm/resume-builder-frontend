@@ -21,16 +21,22 @@ import { useNavigate } from 'react-router-dom'
 import { createResume } from '@/features/create-resume'
 import { saveEditedResume } from '@/features/save-edited-resume'
 import TemplateSettings from './parts/template-settings'
+import { createTemplate } from '@/features/create-template'
+import { saveEditedTemplate } from '@/features/save-edited-template'
 
 type Props = {
   resume: Resume
   setResume: React.Dispatch<React.SetStateAction<Resume>>
   isNewResume: boolean
+  isNewTemplate: boolean
   resumes: Resume[]
   setResumes: React.Dispatch<React.SetStateAction<Resume[]>>
   templates: Template[]
   selectedTemplate: Template
   setSelectedTemplate: React.Dispatch<React.SetStateAction<Template>>
+  setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
+  defaultActiveSection: Section
+  type: 'resume' | 'template'
 }
 
 export type Section =
@@ -45,11 +51,15 @@ export const ResumeInput = ({
   resume,
   setResume,
   isNewResume,
+  isNewTemplate,
   resumes,
   setResumes,
   templates,
   selectedTemplate,
-  setSelectedTemplate
+  setSelectedTemplate,
+  setTemplates,
+  defaultActiveSection,
+  type
 }: Props) => {
   const {
     title,
@@ -66,11 +76,11 @@ export const ResumeInput = ({
   } = resume
   const navigate = useNavigate()
 
-  const [activeSection, setActiveSection] = useState<Section>('personal-details')
+  const [activeSection, setActiveSection] = useState<Section>(defaultActiveSection)
 
   const templatesNames = templates.map(template => template.title)
 
-  const onSave = () => {
+  const onResumeSave = () => {
     if (isNewResume) {
       createResume({
         resume,
@@ -95,24 +105,52 @@ export const ResumeInput = ({
     }
   }
 
+  const onTemplateSave = () => {
+    if (isNewTemplate) {
+      createTemplate({
+        template: selectedTemplate,
+        templates,
+        setTemplates
+      })
+    } else {
+      saveEditedTemplate({
+        template: selectedTemplate,
+        templates,
+        setTemplates
+      })
+    }
+    
+    navigate('/')
+  }
+
   return (
     <Box mr={4} mt={4}>
-      <FormControl fullWidth>
-        <InputLabel id="resume-template-select-label">Resume template</InputLabel>
-        <Select
-          label="Resume template"
-          labelId="resume-template-select-label"
-          id="resume-template-select"
-          value={templatesNames[0]}
-          onChange={e => handleTemplateChange(e.target.value as string)}
-        >
-          {templatesNames.map(templateName => (
-            <MenuItem key={templateName} value={templateName}>
-              {templateName}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      {type === 'resume' ? (
+        <FormControl fullWidth>
+          <InputLabel id="resume-template-select-label">Resume template</InputLabel>
+          <Select
+            label="Resume template"
+            labelId="resume-template-select-label"
+            id="resume-template-select"
+            value={selectedTemplate.title}
+            onChange={e => handleTemplateChange(e.target.value as string)}
+          >
+            {templatesNames.map(templateName => (
+              <MenuItem key={templateName} value={templateName}>
+                {templateName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ) : (
+        <TextField
+          fullWidth
+          label="Template title"
+          value={selectedTemplate.title}
+          onChange={e => setSelectedTemplate({ ...selectedTemplate, title: e.target.value })}
+        />
+      )}
+
       <TemplateSettings
         selectedTemplate={selectedTemplate}
         setSelectedTemplate={setSelectedTemplate}
@@ -159,9 +197,15 @@ export const ResumeInput = ({
         setActiveSection={setActiveSection}
         isNewResume={isNewResume}
       />
-      <Button variant="contained" color="primary" sx={{ my: 2 }} onClick={onSave}>
-        Save resume
-      </Button>
+      {type === 'resume' ? (
+        <Button variant="contained" color="primary" sx={{ my: 2 }} onClick={onResumeSave}>
+          Save resume
+        </Button>
+      ) : (
+        <Button variant="contained" color="primary" sx={{ my: 2 }} onClick={onTemplateSave}>
+          Save template
+        </Button>
+      )}
     </Box>
   )
 }
