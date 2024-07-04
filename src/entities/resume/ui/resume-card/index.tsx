@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
-  const { title, updatedAt, firstName, lastName } = resume
+  const { title, firstName, lastName } = resume
   const fullName = `${firstName} ${lastName}`
 
   return (
@@ -28,7 +28,6 @@ export const ResumeCard = ({ resume, resumes, setResumes }: Props) => {
     >
       <Typography variant="subtitle2">{title}</Typography>
       <Typography variant="h6">{fullName}</Typography>
-      <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
       <EditButton path={`resumes/${resume.id}/edit`} buttonText="Edit resume" variant="contained" />
       <Button
         variant="text"

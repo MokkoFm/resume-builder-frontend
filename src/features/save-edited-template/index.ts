@@ -6,7 +6,7 @@ type Props = {
   setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
-export const saveEditedResume = (props: Props) => {
+export const saveEditedTemplate = (props: Props) => {
   const { template, templates, setTemplates } = props
   const updatedTemplates = templates.map(t => (t.id === template.id ? template : t))
   setTemplates(updatedTemplates)

@@ -7,7 +7,7 @@ import { Resume, Template } from '@/shared/types'
 import { useState } from 'react'
 
 type Params = {
-  resumeId: string
+  id: string
 }
 
 type Props = {
@@ -19,11 +19,11 @@ type Props = {
 
 export const ResumeEditorPage = (props: Props) => {
   const { resumes, setResumes, templates, setTemplates } = props
-  const { resumeId } = useParams<Params>()
+  const { id } = useParams<Params>()
   const navigate = useNavigate()
-  const id = resumeId || ''
+  const resumeId = id || ''
 
-  const { resume, setResume } = useResume(id, resumes)
+  const { resume, setResume } = useResume(resumeId, resumes)
   const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0])
 
   if (!resume) {
@@ -51,11 +51,15 @@ export const ResumeEditorPage = (props: Props) => {
           resume={resume}
           setResume={setResume}
           isNewResume={false}
+          isNewTemplate={false}
           resumes={resumes}
           setResumes={setResumes}
           templates={templates}
           selectedTemplate={selectedTemplate}
           setSelectedTemplate={setSelectedTemplate}
+          setTemplates={setTemplates}
+          defaultActiveSection="personal-details"
+          type="resume"
         />
       </Box>
       <Box

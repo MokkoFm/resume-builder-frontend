@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const TemplateCard = ({ template, templates, setTemplates }: Props) => {
-  const { title, updatedAt } = template
+  const { title } = template
   const navigate = useNavigate()
 
   const getRandomInt = (max: number) => {
@@ -19,6 +19,13 @@ export const TemplateCard = ({ template, templates, setTemplates }: Props) => {
   }
 
   const randomNumber = getRandomInt(100)
+
+  const titleWithMaxSymbolsAndDotsAfter = (title: string, maxSymbols: number) => {
+    if (title.length > maxSymbols) {
+      return title.slice(0, maxSymbols) + '...'
+    }
+    return title
+  }
 
   return (
     <Box
@@ -33,12 +40,17 @@ export const TemplateCard = ({ template, templates, setTemplates }: Props) => {
       }}
       margin={2}
     >
-      <Typography variant="h6">{title}</Typography>
-      <Typography variant="subtitle1">Updated at: {updatedAt}</Typography>
+      <Typography variant="h6" textAlign="center">
+        {titleWithMaxSymbolsAndDotsAfter(title, 15)}
+      </Typography>
       <Button
         variant="contained"
         sx={{ mt: 1 }}
-        onClick={() => navigate(`/resumes/${randomNumber}/create`)}
+        onClick={() =>
+          navigate(`/resumes/${randomNumber}/create`, {
+            state: { templateId: template.id }
+          })
+        }
       >
         Create resume
       </Button>

@@ -1,10 +1,15 @@
+import { useNavigate, useParams } from 'react-router-dom'
 import { ResumeInput, ResumeViewer } from '@/entities/resume'
-import { EMPTY_RESUME } from '@/shared/config'
-import { Resume, Template } from '@/shared/types'
+import { useResume } from '@/shared'
+import { Box, Typography } from '@mui/material'
 import { BackButton } from '@/shared/ui/back-button/back-button'
-import { Box } from '@mui/material'
+import { Resume, Template } from '@/shared/types'
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { MOCK_CANDIDATE_PROFILE } from '@/shared/config'
+
+type Params = {
+  id: string
+}
 
 type Props = {
   resumes: Resume[]
@@ -13,33 +18,42 @@ type Props = {
   setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
-const CreateResumePage = (props: Props) => {
+export const TemplateEditorPage = (props: Props) => {
   const { resumes, setResumes, templates, setTemplates } = props
+  const { id } = useParams<Params>()
   const navigate = useNavigate()
-  const location = useLocation()
+  const templateId = id || ''
 
-  const templateId = location.state?.templateId || ''
   const currentTemplate = templates.find(template => template.id === templateId) || templates[0]
 
-  const newResume = EMPTY_RESUME
-  const [resume, setResume] = useState(newResume)
-
+  const [resume, setResume] = useState<Resume>(MOCK_CANDIDATE_PROFILE)
   const [selectedTemplate, setSelectedTemplate] = useState<Template>(currentTemplate)
 
-  const onBack = () => {
-    navigate('/')
-    setResume(newResume)
+  if (!resume) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}
+      >
+        <Typography variant="h6">Unfortunately, a template doesn't exist</Typography>
+      </Box>
+    )
   }
+
   return (
     <Box display="flex" justifyContent="space-between" height="100vh">
       <Box width="50%">
         <Box mt={2}>
-          <BackButton onBack={onBack} />
+          <BackButton onBack={() => navigate('/')} />
         </Box>
         <ResumeInput
           resume={resume}
           setResume={setResume}
-          isNewResume={true}
+          isNewResume={false}
           isNewTemplate={false}
           resumes={resumes}
           setResumes={setResumes}
@@ -47,8 +61,8 @@ const CreateResumePage = (props: Props) => {
           selectedTemplate={selectedTemplate}
           setSelectedTemplate={setSelectedTemplate}
           setTemplates={setTemplates}
-          defaultActiveSection="personal-details"
-          type="resume"
+          defaultActiveSection="template-settings"
+          type="template"
         />
       </Box>
       <Box
@@ -66,5 +80,3 @@ const CreateResumePage = (props: Props) => {
     </Box>
   )
 }
-
-export default CreateResumePage

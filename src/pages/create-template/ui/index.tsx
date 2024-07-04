@@ -1,10 +1,10 @@
 import { ResumeInput, ResumeViewer } from '@/entities/resume'
-import { EMPTY_RESUME } from '@/shared/config'
+import { EMPTY_RESUME, MOCK_CANDIDATE_PROFILE } from '@/shared/config'
 import { Resume, Template } from '@/shared/types'
 import { BackButton } from '@/shared/ui/back-button/back-button'
 import { Box } from '@mui/material'
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   resumes: Resume[]
@@ -13,18 +13,12 @@ type Props = {
   setTemplates: React.Dispatch<React.SetStateAction<Template[]>>
 }
 
-const CreateResumePage = (props: Props) => {
+const CreateTemplatePage = (props: Props) => {
   const { resumes, setResumes, templates, setTemplates } = props
   const navigate = useNavigate()
-  const location = useLocation()
-
-  const templateId = location.state?.templateId || ''
-  const currentTemplate = templates.find(template => template.id === templateId) || templates[0]
-
-  const newResume = EMPTY_RESUME
+  const newResume = MOCK_CANDIDATE_PROFILE as Resume
   const [resume, setResume] = useState(newResume)
-
-  const [selectedTemplate, setSelectedTemplate] = useState<Template>(currentTemplate)
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0])
 
   const onBack = () => {
     navigate('/')
@@ -39,16 +33,16 @@ const CreateResumePage = (props: Props) => {
         <ResumeInput
           resume={resume}
           setResume={setResume}
-          isNewResume={true}
-          isNewTemplate={false}
+          isNewResume={false}
+          isNewTemplate={true}
           resumes={resumes}
           setResumes={setResumes}
           templates={templates}
           selectedTemplate={selectedTemplate}
           setSelectedTemplate={setSelectedTemplate}
           setTemplates={setTemplates}
-          defaultActiveSection="personal-details"
-          type="resume"
+          defaultActiveSection="template-settings"
+          type="template"
         />
       </Box>
       <Box
@@ -67,4 +61,4 @@ const CreateResumePage = (props: Props) => {
   )
 }
 
-export default CreateResumePage
+export default CreateTemplatePage
